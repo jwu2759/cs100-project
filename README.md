@@ -1,8 +1,8 @@
 # Lost Souls
  Authors: <br/>
- [Ryan Chang, https://github.com/ryanchangx] <br/>
- [Min-Chen Wu, https://github.com/jwu2759] <br/>
- [Karan Bhogal, https://github.com/karanpanman]
+ > Ryan Chang, https://github.com/ryanchangx <br/>
+ > Min-Chen Wu, https://github.com/jwu2759 <br/>
+ > Karan Bhogal, https://github.com/karanpanman
  
 ## Project Description
 Our project will be a story-driven RPG with linear progression. We want to have a compelling story relying on understandable motives and the weight of one’s decisions. We plan to have a party (each with unique classes) consisting of the main protagonist (intended to be the player), along with multiple trusted allies. Throughout the course of the game, the main party will have to fight foes and ultimately reach a final destination.
