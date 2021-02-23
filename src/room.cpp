@@ -1,16 +1,15 @@
 #include "room.h"
 
 Room::Room(){
-	choices.push_back(nullptr);
+	nextRoom = nullptr;
 }
-void Room::addChoice(Room* r){
-	choices.push_back(r);
+
+void Room::setNext(Room* room){
+	nextRoom = room;
 }
-vector<Room*>& Room::getChoices(){
-	return choices;
-}
-const vector<Room*>& Room::getChoices() const{
-	return choices;
+
+Room* Room::getNext(){
+	return nextRoom;
 }
 
 Shop::Shop(){
@@ -21,7 +20,7 @@ void Shop::displayOptions();
 void Shop::upgradeWeapon(Character* c);
 
 Battle::Battle(){
-	
+	//FIXME: CALL THE ENEMY CONSTRUCTOR AND MAKE THE ENEMY VECTOR WITH CREATED ENEMY OBJECTS
 }
 bool Battle::clear(){	//returns if room is cleared, if enemies is empty return true
 	return enemies.empty();
@@ -85,7 +84,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			p->attack(target1);
 			if(target1->currHealth <= 0){
 				iter = enemies.begin();
-				while(*iter != target){
+				while(*iter != target1){
 					++iter;
 				}
 				enemies.erase(iter.begin());

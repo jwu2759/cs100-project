@@ -11,12 +11,11 @@ using namespace std;
 
 class Room{
 	private:
-		vector<Room*> choices;
+		Room* nextRoom;
 	public:
 		Room();
-		void addChoice(Room* r);
-		vector<Room*>& getChoices();	//replaces displayChoices, returns entire vector
-		const vector<Room*>& getChoices() const;	
+		void setNext(Room* r);
+		Room* getNext();
 };
 
 class Shop : public Room{
