@@ -56,3 +56,18 @@ class Enemy : public Character{
 			target->currHealth = target->currHealth - atkAmount;        
 		}
 };
+
+class Ally : public Character{
+        private:
+        public:
+                Ally (string& userName, string& wepType){
+                        name = userName;
+                        w = new Weapon(wepType);
+                        atkAmount = w->getAttack();
+                        atkPhrase = w->getPhrase();
+                }
+
+                virtual int attack(Character* target){
+             		cout << name << " " << atkPhrase << target->name;                       	target->currHealth = target->currHealth - atkAmount
+		}
+};
