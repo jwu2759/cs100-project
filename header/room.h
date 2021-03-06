@@ -1,9 +1,7 @@
 #ifndef __ROOM_H__
 #define __ROOM_H__
 
-#include "item.h"
-#include "CharacterList.h"
-#include "Character.h"
+#include "../header/character.hpp"
 
 
 using namespace std;

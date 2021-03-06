@@ -71,6 +71,8 @@ class Ally : public Character{
                 }
 
                 virtual int attack(Character* target){
-             		cout << name << " " << w->getPhrase() << target->name;                       	target->currHealth = (target->currHealth) - (w->getAttack()) ;		
+             		cout << name << " " << w->getPhrase() << target->name;
+			target->currHealth = (target->currHealth) - (w->getAttack()) ;		
 		}
 };
+#endif

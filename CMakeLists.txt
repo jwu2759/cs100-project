@@ -9,12 +9,15 @@ ADD_EXECUTABLE(
 	./tests/test.cpp
 	./tests/room_test.hpp
 	./src/room.cpp
+	./tests/factory_test.hpp
+	./header/factory.hpp
+	./header/weapon.hpp
 )
 
 ADD_EXECUTABLE(
 	game
-	./main.cpp
-	./room.cpp
+	./src/main.cpp
+	./src/room.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
