@@ -5,7 +5,7 @@
 
 class Factory{
 	public:
-		Weapon* parse(int x){
+		Weapon* create(int x){
 			switch(x){
 				case 1: return new baseSword();
 				case 2: return new baseSpear();
