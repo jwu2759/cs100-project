@@ -126,7 +126,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			// ATTACK THAT TARGET
 		int enemyTarget;
 		for(int i = 0; i < enemies.size(); ++i){
-			enemyTarget = rand() % 2;
+			enemyTarget = rand() % 2 + 1;
 			if(enemyTarget == 1){	//attack the player
 				enemies.at(i)->attack(p);
 			}
@@ -143,6 +143,3 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		}
 	}
 }
-
-string Story::getStory();
-void Story::setStory();
