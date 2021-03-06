@@ -74,3 +74,5 @@ class Ally : public Character{
              		cout << name << " " << w->getPhrase() << target->name;                       	target->currHealth = (target->currHealth) - (w->getAttack()) ;		
 		}
 };
+
+#endif

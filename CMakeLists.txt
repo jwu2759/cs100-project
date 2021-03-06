@@ -13,8 +13,8 @@ ADD_EXECUTABLE(
 
 ADD_EXECUTABLE(
 	game
-	./main.cpp
-	./room.cpp
+	./src/main.cpp
+	./src/room.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)

@@ -1,10 +1,7 @@
 #ifndef __ROOM_H__
 #define __ROOM_H__
 
-#include "item.h"
-#include "CharacterList.h"
-#include "Character.h"
-
+#include "../header/character.hpp"
 
 using namespace std;
 
@@ -27,8 +24,8 @@ class Battle : public Room{
 		void fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
 };
 
-class Story : public Room;
+class Story : public Room{};
 
-class Story : public Room;
+class Shop : public Room{};
 
 #endif
