@@ -1,6 +1,7 @@
 #ifndef __ROOM_H__
 #define __ROOM_H__
 
+#include <bits/stdc++.h>
 #include "../header/character.hpp"
 
 using namespace std;
@@ -21,6 +22,7 @@ class Battle : public Room{
 		string BattleText;	//add more strings as needed for Battle.
 	public:
 		Battle();
+		~Battle();
 		void fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
 };
 
