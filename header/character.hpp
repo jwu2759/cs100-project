@@ -5,6 +5,7 @@
 #include "factory.hpp"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -18,8 +19,14 @@ class Character{
 		std::string name;
 	public:
 		virtual int attack(Character* target) = 0;
-		int getCurrHealth (){
+		int getHealth (){
 			return currHealth;
+		}
+		void setHealth(int remHealth){
+			currHealth = remHealth;
+		}
+		std::string getName(){
+			return name;
 		}
 
 };
@@ -36,8 +43,8 @@ class Player : public Character{
 		virtual int attack(Character* target){
 			//out some for of output like "WHAM, BOOM!"
 			// I'll just subtract a certain amount rn
-			cout << name << " " << w->getPhrase() << target->name;
-			target->currHealth = (target->currHealth) - (w->getAttack());
+			cout << name << " " << w->getPhrase() << target->getName();
+			target->setHealth( (target->getHealth()) - (w->getAttack()) );
 		}
 
 };
@@ -56,8 +63,9 @@ class Enemy : public Character{
                 virtual int attack(Character* target){
                         //out some for of output like "WHAM, BOOM!"
                         //                        // I'll just subtract a certain amount rn
-              		cout << name << " " << w->getPhrase() << target->name;
-			target->currHealth = (target->currHealth) - (w->getAttack());
+			cout << name << " " << w->getPhrase() << target->getName();
+                        target->setHealth( (target->getHealth()) - (w->getAttack()) );
+
 		}
 };
 
@@ -75,4 +83,5 @@ class Ally : public Character{
 			target->currHealth = (target->currHealth) - (w->getAttack()) ;		
 		}
 };
+
 #endif
