@@ -17,18 +17,6 @@ class Room{
 		Room* getNext();
 };
 
-class Shop : public Room{
-	private:
-		string ShopText;
-		vector<Item> shopChoices;
-	public:
-		Shop();
-		Shop(string text);
-		void addChoice(Item i);
-		void displayOptions();
-		void upgradeWeapon(Character* c);
-};
-
 class Battle : public Room{
 	private:
 		vector<Enemy*> enemies;
@@ -39,12 +27,8 @@ class Battle : public Room{
 		void fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
 };
 
-class Story : public Room{
-	private:
-		string StoryText;
-	public:
-		string getStory();
-		void setStory();
-}
+class Story : public Room;
+
+class Story : public Room;
 
 #endif
