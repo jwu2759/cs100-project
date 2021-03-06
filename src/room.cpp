@@ -119,7 +119,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			a->defend();
 			def1 = false;
 		}
-		//then allyy
+		//then ally
 		//FIXME: IMPLEMENT THE ENEMY ATTACKING SYSTEM
 		//FOR EVERY ENEMY IN ENEMIES
 			// PICK A TARGET
@@ -131,7 +131,9 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				enemies.at(i)->attack(p);
 			}
 			else if(enemyTarget == 2)	//attack the ally
-				enemies.at(i)->attack(a);
+				if(a->currHealth > 0){
+					enemies.at(i)->attack(a);
+				}
 			}
 			if(p->currHealth <= 0){
 				cout << "YOU DIED, GAME OVER." << endl;
