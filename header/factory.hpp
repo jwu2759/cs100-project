@@ -7,10 +7,10 @@ class Factory{
 	public:
 		Weapon* parse(int x){
 			switch(x){
-				case 1: return new baseSword;
-				case 2: return new baseSpear;
-				case 3: return new baseAxe;
-							
+				case 1: return new baseSword();
+				case 2: return new baseSpear();
+				case 3: return new baseAxe();
+				
 			}
 		}
 };
