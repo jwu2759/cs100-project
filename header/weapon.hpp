@@ -7,14 +7,12 @@ class Weapon{
 		std::string phrase;
 	public:
 		
-		Weapon(int atk, std::string phr){
-			attack = atk;
-			phrase = phr;
-		}
+		Weapon(){}
 		~Weapon();
 		
-		int getAttack(){return attack;}
-		std::string getPhrase(){return phrase;}
+		virtual int getAttack() = 0;
+		virtual std::string getPhrase() = 0;
+
 };
 
 class baseSword : public Weapon{
@@ -24,7 +22,16 @@ class baseSword : public Weapon{
 	public:
 		baseSword();
 		~baseSword();		
+		virtual int getAttack(){
+			return attack;
+		}
+                virtual std::string getPhrase(){
+			return phrase;
+		}
+		virtual void setAttack(int num){
 
+		}
+                virtual void setPhrase(std::string phr) = 0;
 };
 
 class baseSpear : public Weapon{
@@ -36,7 +43,12 @@ class baseSpear : public Weapon{
         public:
                 baseSpear();
                 ~baseSpear();
-
+		virtual int getAttack(){
+                        return attack;
+                }
+                virtual std::string getPhrase(){
+                        return phrase;
+                }
 };
 
 class baseAxe : public Weapon{
@@ -47,6 +59,11 @@ class baseAxe : public Weapon{
         public:
                 baseAxe();
                 ~baseAxe();
-
+		virtual int getAttack(){
+                        return attack;
+                }
+                virtual std::string getPhrase(){
+                        return phrase;
+                }
 };
 #endif
