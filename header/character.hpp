@@ -18,6 +18,10 @@ class Character{
 		std::string name;
 	public:
 		virtual int attack(Character* target) = 0;
+		int getCurrHealth (){
+			return currHealth;
+		}
+
 };
 
 class Player : public Character{
