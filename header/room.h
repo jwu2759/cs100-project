@@ -1,7 +1,6 @@
 #ifndef __ROOM_H__
 #define __ROOM_H__
 
-#include <bits/stdc++.h>
 #include "item.h"
 #include "CharacterList.h"
 #include "Character.h"
