@@ -55,12 +55,12 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 					}
 					cin >> value;
 					--value;
-					if(value > enemies.size() || value <= 0){
+					if(value > enemies.size() || value < 0){
 						cout << "Invalid input, try again." << endl;
 						value = -1;
 					}
 					else{
-						target1 = enemies.at(value - 1);
+						target1 = enemies.at(value);
 					}
 				}
 			}

@@ -12,8 +12,8 @@ class Weapon{
 		virtual ~Weapon() = default;
 		
 		int getAttack(){return attack;}
-		std::string getPhrase(){return phrase;}
-
+		const std::string& getPhrase(){return phrase;}
+	
 
 };
 
