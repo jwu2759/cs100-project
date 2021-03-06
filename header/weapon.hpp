@@ -49,4 +49,5 @@ class baseAxe : public Weapon{
                 ~baseAxe();
 
 };
+
 #endif
