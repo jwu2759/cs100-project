@@ -160,12 +160,10 @@ class Ally : public Character{
                 }
 		
 		virtual void defend(){
-                        cout << name << " is defending!" <<endl;
-                        currHealth = currHealth + 10;
-                        cout << name << "'s current health: " << currHealth << endl;
+
 			cout << name << " is defending!" <<endl;
                         if (currHealth < 90 ){
-                                currHealth = currHealth + 3;
+                                currHealth = currHealth + 10;
                                 cout << name << "'s current health: " << currHealth << endl;
                         }
                         else if (currHealth < 100 ){
