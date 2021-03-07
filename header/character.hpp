@@ -56,6 +56,7 @@ class Player : public Character{
 		virtual void attack(Character* target){
 			//out some for of output like "WHAM, BOOM!"
 			// I'll just subtract a certain amount rn
+			if(!target) return;
 			cout << name << " " << w->getPhrase() << " " << target->getName() << "!" << endl;
 			target->setHealth( (target->getHealth()) - (w->getAttack()) );
 		}
@@ -83,6 +84,7 @@ class Enemy : public Character{
                 virtual void attack(Character* target){
                         //out some for of output like "WHAM, BOOM!"
                         //                        // I'll just subtract a certain amount rn
+			if(!target) return;
 			cout << name << " " << w->getPhrase() << " " << target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
 
@@ -105,7 +107,8 @@ class Ally : public Character{
                 }
 
                 virtual void attack(Character* target){
-			cout << name << " " << w->getPhrase() << " "<< target->getName() << "!";
+			if(!target) return;
+			cout << name << " " << w->getPhrase() << " "<< target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
 		}
 			//ally heal ability

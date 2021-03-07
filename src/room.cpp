@@ -4,6 +4,15 @@ Room::Room(){
 	nextRoom = nullptr;
 }
 
+Room::Room(Room* r){
+	if(r != this)
+		nextRoom = r;
+	else{
+		cout << "INVALID ROOM" << endl;
+		exit(1);
+	}
+}
+
 void Room::setNext(Room* room){
 	nextRoom = room;
 }
@@ -14,12 +23,12 @@ Room* Room::getNext(){
 
 Battle::Battle(){
 	//FIXME: CALL THE ENEMY CONSTRUCTOR AND MAKE THE ENEMY VECTOR WITH CREATED ENEMY OBJECTS
-	int enemyMax = 10;
-	int enemyCount = rand() % enemyMax;
+	int enemyMax = 4;
+	int enemyCount = rand() % enemyMax + 1;
 	string enemyName;
 	for(int i = 0; i < enemyCount; ++i){
 		enemyName = "Ghost" + to_string(i + 1);
-		enemies.push_back(new Enemy(enemyName, rand() % 3));
+		enemies.push_back(new Enemy(enemyName, rand() % 3 + 1));
 	}
 }
 Battle::~Battle(){
@@ -34,6 +43,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 	string temp;
 	bool atk = false, def = false;
 	bool atk1 = false, def1 = false;
+	bool allyPrint = true;
 	Enemy* target1;
 	Enemy* target2;
 	vector<Enemy*>::iterator iter;
@@ -55,12 +65,12 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 					}
 					cin >> value;
 					--value;
-					if(value > enemies.size() || value < 0){
-						cout << "Invalid input, try again." << endl;
-						value = -1;
+					if(value < enemies.size() && value >= 0){
+						target1 = enemies.at(value);
 					}
 					else{
-						target1 = enemies.at(value);
+						cout << "Invalid input, try again." << endl;
+						value = -1;
 					}
 				}
 			}
@@ -94,8 +104,12 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				iter = enemies.begin();
 				while(*iter != target1){
 					++iter;
+					if(iter == enemies.end()) break;
 				}
-				enemies.erase(iter);
+				if(iter != enemies.end()){
+					delete *iter;
+					enemies.erase(iter);
+				}
 			}
 			atk = false;
 		}
@@ -110,8 +124,12 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				iter = enemies.begin();
 				while(*iter != target2){
 					++iter;
+					if(iter == enemies.end()) break;
 				}
-				enemies.erase(iter);
+				if(iter != enemies.end()){
+					delete *iter;
+					enemies.erase(iter);
+				}
 			}
 			atk1 = false;
 		}
@@ -119,28 +137,24 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			//FIXME: ADD SOME DEFENSE STRATEGY a->defend();
 			def1 = false;
 		}
-		//then ally
-		//FIXME: IMPLEMENT THE ENEMY ATTACKING SYSTEM
-		//FOR EVERY ENEMY IN ENEMIES
-			// PICK A TARGET
-			// ATTACK THAT TARGET
-		int enemyTarget;
-		for(int i = 0; i < enemies.size(); ++i){
-			enemyTarget = rand() % 2 + 1;
-			if(enemyTarget == 1){	//attack the player
-				enemies.at(i)->attack(p);
+		int targetNum;
+		for(iter = enemies.begin(); iter != enemies.end(); ++iter){
+			targetNum = rand() % 3;
+			if(targetNum == 0)
+				(*iter)->attack(p);
+			else if(targetNum == 1 && a->getHealth() > 0)
+				(*iter)->attack(a);
+			else if(targetNum == 2)
+				(*iter)->ability(*iter);
+			if(p->getHealth() <= 0){
+				cout << "You died, game over." << endl;
+				return;
 			}
-			else if(enemyTarget == 2)	//attack the ally
-				if(a->getHealth() > 0){
-					enemies.at(i)->attack(a);
-				}
-		}
-		if(p->getHealth() <= 0){
-			cout << "YOU DIED, GAME OVER." << endl;
-			exit(1);
-		}
-		if(a->getHealth() <= 0){
-			cout << a->getName() << " HAS DIED." << endl;
+			if(a->getHealth() <= 0 && allyPrint){
+				cout << a->getName() << " has died." << endl;
+				allyPrint = false;
+			}
 		}
 	}
+	cout << "Room cleared!" << endl;
 }
