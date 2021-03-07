@@ -41,7 +41,9 @@ class Character{
 		int weaponDamage(){
 			return w->getAttack();
 		}
-		
+		~Character(){
+			delete w;
+		}
 
 };
 
@@ -157,6 +159,7 @@ class Ally : public Character{
 			else{
 				target->setHealth(100);
 			}
+			cout << target->getName() << "'s current health: " << target->getHealth() << endl;
                 }
 		
 		virtual void defend(){
