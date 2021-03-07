@@ -23,8 +23,8 @@ Room* Room::getNext(){
 
 Battle::Battle(){
 	//FIXME: CALL THE ENEMY CONSTRUCTOR AND MAKE THE ENEMY VECTOR WITH CREATED ENEMY OBJECTS
-	int enemyMax = 5;
-	int enemyCount = rand() % enemyMax;
+	int enemyMax = 4;
+	int enemyCount = rand() % enemyMax + 1;
 	string enemyName;
 	for(int i = 0; i < enemyCount; ++i){
 		enemyName = "Ghost" + to_string(i + 1);
@@ -106,8 +106,10 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 					++iter;
 					if(iter == enemies.end()) break;
 				}
-				if(iter != enemies.end())
+				if(iter != enemies.end()){
+					delete *iter;
 					enemies.erase(iter);
+				}
 			}
 			atk = false;
 		}
@@ -124,8 +126,10 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 					++iter;
 					if(iter == enemies.end()) break;
 				}
-				if(iter != enemies.end())
+				if(iter != enemies.end()){
+					delete *iter;
 					enemies.erase(iter);
+				}
 			}
 			atk1 = false;
 		}
@@ -138,13 +142,13 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			targetNum = rand() % 3;
 			if(targetNum == 0)
 				(*iter)->attack(p);
-			else if(targetNum == 1)
+			else if(targetNum == 1 && a->getHealth() > 0)
 				(*iter)->attack(a);
 			else if(targetNum == 2)
 				(*iter)->ability(*iter);
 			if(p->getHealth() <= 0){
 				cout << "You died, game over." << endl;
-				exit(1);
+				return;
 			}
 			if(a->getHealth() <= 0 && allyPrint){
 				cout << a->getName() << " has died." << endl;

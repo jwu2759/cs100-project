@@ -19,5 +19,10 @@ int main(){
 		iter.execute();
 		iter.next();
 	}
+	delete user;
+	delete comp;
+	delete Story1;
+	delete Battle1;
+	delete Story2;
 	return 0;	
 }
