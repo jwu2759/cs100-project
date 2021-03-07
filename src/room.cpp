@@ -1,4 +1,4 @@
-#include "room.h"
+#include "../header/room.h"
 
 Room::Room(){
 	nextRoom = nullptr;
@@ -19,7 +19,7 @@ Battle::Battle(){
 	string enemyName;
 	for(int i = 0; i < enemyCount; ++i){
 		enemyName = "Ghost" + to_string(i + 1);
-		enemies.push_back(new Enemy(enemyName, "FIXME: WEAPON NAME"));
+		enemies.push_back(new Enemy(enemyName, rand() % 3));
 	}
 }
 Battle::~Battle(){
@@ -51,23 +51,23 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				while(value == -1){
 					cout << "Attack who?" << endl;
 					for(int i = 0; i < enemies.size(); ++i){
-						cout << "( " <<  i + 1 << " ) " << enemies.at(i).name << endl;
+						cout << "( " <<  i + 1 << " ) " << enemies.at(i)->getName() << endl;
 					}
 					cin >> value;
 					--value;
-					if(value > enemies.size() || value <= 0){
+					if(value > enemies.size() || value < 0){
 						cout << "Invalid input, try again." << endl;
 						value = -1;
 					}
 					else{
-						target1 = enemies.at(i - 1);
+						target1 = enemies.at(value);
 					}
 				}
 			}
 			else if(temp == "2"){
 				def = true;
 			}
-			else if(temp == "3"{
+			else if(temp == "3"){
 				cout << "You give up." << endl;
 				return;
 			}
@@ -75,7 +75,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		//actions of the ally
 			//randomly decide
 		int allyChoice = rand() % 2 + 1;
-		if(a->currHealth > 0){
+		if(a->getHealth() > 0){
 			if(allyChoice = 1){
 				atk1 = true;
 				target2 = enemies.at(rand() % enemies.size());
@@ -90,7 +90,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		//team attacks first
 		if(atk){
 			p->attack(target1);
-			if(target1->currHealth <= 0){
+			if(target1->getHealth() <= 0){
 				iter = enemies.begin();
 				while(*iter != target1){
 					++iter;
@@ -106,7 +106,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		//these will all be false if the ally is dead, picking sequence will not happen.
 		if(atk1){
 			a->attack(target2);
-			if(target2->currHealth <= 0){
+			if(target2->getHealth() <= 0){
 				iter = enemies.begin();
 				while(*iter != target2){
 					++iter;
@@ -116,7 +116,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			atk1 = false;
 		}
 		else if(def1){
-			a->defend();
+			//FIXME: ADD SOME DEFENSE STRATEGY a->defend();
 			def1 = false;
 		}
 		//then ally
@@ -131,17 +131,16 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				enemies.at(i)->attack(p);
 			}
 			else if(enemyTarget == 2)	//attack the ally
-				if(a->currHealth > 0){
+				if(a->getHealth() > 0){
 					enemies.at(i)->attack(a);
 				}
-			}
-			if(p->currHealth <= 0){
-				cout << "YOU DIED, GAME OVER." << endl;
-				exit(1);
-			}
-			if(a->currHealth <= 0){
-				cout << a->name << " HAS DIED." << endl;
-			}
+		}
+		if(p->getHealth() <= 0){
+			cout << "YOU DIED, GAME OVER." << endl;
+			exit(1);
+		}
+		if(a->getHealth() <= 0){
+			cout << a->getName() << " HAS DIED." << endl;
 		}
 	}
 }

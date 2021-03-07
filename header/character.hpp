@@ -47,7 +47,7 @@ class Character{
 class Player : public Character{
 	private:
 	public:
-		Player (string& userName, int& wepType){
+		Player (const string& userName, int wepType){
 			name = userName;
 			Factory wepMaker;
 			w = wepMaker.create(wepType);	
@@ -73,7 +73,7 @@ class Enemy : public Character{
         private:
         public:	
 		//not too sure if we want a username here or nah??
-                Enemy (string& userName, int& wepType){
+                Enemy (const string& userName, int wepType){
                         name = userName;
 			Factory wepMaker;
                         w = wepMaker.create(wepType);
@@ -98,7 +98,7 @@ class Enemy : public Character{
 class Ally : public Character{
         private:
         public:
-                Ally (string& userName, int& wepType){
+                Ally (const string userName, int wepType){
                         name = userName;
 			Factory wepMaker;
                         w = wepMaker.create(wepType);
