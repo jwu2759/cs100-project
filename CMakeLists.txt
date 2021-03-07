@@ -7,15 +7,10 @@ ADD_SUBDIRECTORY(googletest)
 ADD_EXECUTABLE(
 	test
 	./tests/test.cpp
-	./tests/room_test.hpp
-	./src/room.cpp
+	
 )
 
-ADD_EXECUTABLE(
-	game
-	./main.cpp
-	./room.cpp
-)
+
 
 TARGET_LINK_LIBRARIES(test gtest)
 TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON)
