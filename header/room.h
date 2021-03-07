@@ -15,6 +15,7 @@ class Room{
 		virtual ~Room() = default;
 		void setNext(Room* r);
 		Room* getNext();
+		virtual void execute(Player* p, Ally* a) = 0;
 };
 
 class Battle : public Room{
@@ -26,6 +27,9 @@ class Battle : public Room{
 		Battle();
 		~Battle();
 		void fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
+		void execute(Player* p, Ally* a){
+			fight(p,a);
+		}
 };
 
 class Story : public Room{
@@ -37,6 +41,9 @@ class Story : public Room{
 		}	
 		const string& getStory(){
 			return storyText;
+		}
+		void execute(Player* p, Ally* a){
+			cout << getStory() << endl;
 		}
 };
 
