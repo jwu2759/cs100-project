@@ -13,7 +13,7 @@ class Weapon{
 		
 		int getAttack(){return attack;}
 		const std::string& getPhrase(){return phrase;}
-	
+		int setAttack(int num){ attack = num; }
 
 };
 
@@ -25,6 +25,7 @@ class baseSword : public Weapon{
 			attack = 25;
 			phrase = "WHACKED";
 		}
+
 
 };
 
