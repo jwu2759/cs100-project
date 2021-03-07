@@ -59,14 +59,16 @@ class Player : public Character{
 			if(!target) return;
 			cout << name << " " << w->getPhrase() << " " << target->getName() << "!" << endl;
 			target->setHealth( (target->getHealth()) - (w->getAttack()) );
+			cout << target->getName() << " has " << target->getHealth() << " HP left!" << endl;
 		}
 			//random damage ability
 		virtual void ability(Character* target){
-			int rand = (w->getAttack() % 20) + 10 ;
-			cout << name << " is charing their attack ability!" << endl;
-			cout << "Amount charged: " << rand << endl;
+			int rand = (w->getAttack() % 6) + 5 ;
                         target->setHealth( ((target->getHealth()) - rand) );
+			cout << target->getName() << " has "<< target->getHealth() << " HP left!"  << endl;
+
 		}
+
 
 };
 
@@ -87,12 +89,14 @@ class Enemy : public Character{
 			if(!target) return;
 			cout << name << " " << w->getPhrase() << " " << target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
+			cout << target->getName() << " has " << target->getHealth() << " HP left!" << endl;
 
 		}
 			//Enemy buff ability
 		virtual void ability(Character* target){
                         w->setAttack( w->getAttack() + 3 );
                         cout << name << " is using their buff ability for permanent damage!" << endl;
+			
 		}
 
 };
@@ -100,7 +104,7 @@ class Enemy : public Character{
 class Ally : public Character{
         private:
         public:
-                Ally (const string userName, int wepType){
+                Ally (const string& userName, int wepType){
                         name = userName;
 			Factory wepMaker;
                         w = wepMaker.create(wepType);
@@ -110,6 +114,7 @@ class Ally : public Character{
 			if(!target) return;
 			cout << name << " " << w->getPhrase() << " "<< target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
+			cout << target->getName() << " has " << target->getHealth() << " HP left!" << endl;
 		}
 			//ally heal ability
 		virtual void ability(Character* target){
