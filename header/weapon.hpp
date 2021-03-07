@@ -45,7 +45,7 @@ class baseAxe : public Weapon{
 
         public:
                 baseAxe(){
-			attack = 10;
+			attack = 3;
 			phrase = "BONKED";
 		}
 
