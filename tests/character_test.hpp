@@ -182,7 +182,7 @@ MainCh->setHealth(60);
 
 MyMan->ability(MainCh);
 
-EXPECT_EQ(MainCh->getHealth(), 70 );
+EXPECT_EQ(MainCh->getHealth(), 75 );
 }
 
 TEST(AbilityTest, AbilityCheck3){
@@ -217,5 +217,114 @@ enemy->attack(mc);
 EXPECT_EQ(mc->getHealth(), 94 );
 }
 
+TEST(DefendTest, DefendCheck){
+	std::string ryan = "Ryan";
+	int weapon = 1;
+	Character* MyMan = new Player (ryan, weapon);
+
+
+	MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 100 );
+}
+
+TEST(DefendTest, DefendCheck2){
+        std::string ryan = "Ryan";
+        int weapon = 1;
+        Character* MyMan = new Player (ryan, weapon);
+	
+	MyMan->setHealth(94);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 99 );
+}
+
+TEST(DefendTest, DefendCheck3){
+        std::string ryan = "Ryan";
+        int weapon = 1;
+        Character* MyMan = new Player (ryan, weapon);
+
+        MyMan->setHealth(96);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 100 );
+}
+
+TEST(DefendTest, DefendCheck4){
+        std::string ryan = "Jason";
+        int weapon = 1;
+        Character* MyMan = new Ally (ryan, weapon);
+	
+        MyMan->setHealth(72);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 82 );
+}
+
+TEST(DefendTest, DefendCheck5){
+        std::string ryan = "Jason";
+        int weapon = 1;
+        Character* MyMan = new Ally (ryan, weapon);
+
+        MyMan->setHealth(1);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 11 );
+}
+
+TEST(DefendTest, DefendCheck6){
+        std::string ryan = "Jason";
+        int weapon = 1;
+        Character* MyMan = new Ally (ryan, weapon);
+
+        MyMan->setHealth(92);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 100 );
+}
+
+TEST(DefendTest, DefendCheck7){
+        std::string ryan = "Jason";
+        int weapon = 1;
+        Character* MyMan = new Ally (ryan, weapon);
+
+        MyMan->setHealth(100);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 100 );
+}
+
+TEST(DefendTest, DefendCheck8){
+        std::string ryan = "Karan";
+        int weapon = 1;
+        Character* MyMan = new Enemy (ryan, weapon);
+
+        MyMan->setHealth(100);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 100 );
+}
+
+TEST(DefendTest, DefendCheck9){
+        std::string ryan = "Karan";
+        int weapon = 1;
+        Character* MyMan = new Enemy (ryan, weapon);
+
+        MyMan->setHealth(99);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 100 );
+}
+
+TEST(DefendTest, DefendCheck10){
+        std::string ryan = "Karan";
+        int weapon = 1;
+        Character* MyMan = new Enemy (ryan, weapon);
+
+        MyMan->setHealth(73);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 76 );
+}
 
 #endif

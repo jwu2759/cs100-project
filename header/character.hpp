@@ -151,8 +151,8 @@ class Ally : public Character{
 			//ally heal ability
 		virtual void ability(Character* target){
                         cout << name << " is using their heal ability on " << target->getName() << "!" << endl;
-			if ( (target->getHealth()) < 90){
-				target->setHealth( (target->getHealth() + 10) );
+			if ( (target->getHealth()) < 85){
+				target->setHealth( (target->getHealth() + 15) );
 			}
 			else{
 				target->setHealth(100);
