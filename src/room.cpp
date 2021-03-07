@@ -4,6 +4,15 @@ Room::Room(){
 	nextRoom = nullptr;
 }
 
+Room::Room(Room* r){
+	if(r != this)
+		nextRoom = r;
+	else{
+		cout << "INVALID ROOM" << endl;
+		exit(1);
+	}
+}
+
 void Room::setNext(Room* room){
 	nextRoom = room;
 }
@@ -34,6 +43,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 	string temp;
 	bool atk = false, def = false;
 	bool atk1 = false, def1 = false;
+	bool allyPrint = true;
 	Enemy* target1;
 	Enemy* target2;
 	vector<Enemy*>::iterator iter;
@@ -94,8 +104,10 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				iter = enemies.begin();
 				while(*iter != target1){
 					++iter;
+					if(iter == enemies.end()) break;
 				}
-				enemies.erase(iter);
+				if(iter != enemies.end())
+					enemies.erase(iter);
 			}
 			atk = false;
 		}
@@ -110,8 +122,10 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				iter = enemies.begin();
 				while(*iter != target2){
 					++iter;
+					if(iter == enemies.end()) break;
 				}
-				enemies.erase(iter);
+				if(iter != enemies.end())
+					enemies.erase(iter);
 			}
 			atk1 = false;
 		}
@@ -120,21 +134,23 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			def1 = false;
 		}
 		int targetNum;
-		for(auto x : enemies){
+		for(iter = enemies.begin(); iter != enemies.end(); ++iter){
 			targetNum = rand() % 3;
 			if(targetNum == 0)
-				x->attack(p);
+				(*iter)->attack(p);
 			else if(targetNum == 1)
-				x->attack(a);
+				(*iter)->attack(a);
 			else if(targetNum == 2)
-				x->ability(x);
+				(*iter)->ability(*iter);
 			if(p->getHealth() <= 0){
-				std::cout << "You died, game over." << std::endl;
+				cout << "You died, game over." << endl;
 				exit(1);
 			}
-			if(a->getHealth() <= 0){
-				std::cout << a->getName() << " has died." << std::endl;
+			if(a->getHealth() <= 0 && allyPrint){
+				cout << a->getName() << " has died." << endl;
+				allyPrint = false;
 			}
 		}
 	}
+	cout << "Room cleared!" << endl;
 }

@@ -8,9 +8,11 @@ using namespace std;
 
 class Room{
 	private:
-		Room* nextRoom;
+		Room* nextRoom = nullptr;
 	public:
 		Room();
+		Room(Room* r);
+		virtual ~Room() = default;
 		void setNext(Room* r);
 		Room* getNext();
 };
@@ -26,7 +28,17 @@ class Battle : public Room{
 		void fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
 };
 
-class Story : public Room{};
+class Story : public Room{
+	private:
+		string storyText;
+	public:
+		Story(const string& story){
+			storyText = story;
+		}	
+		const string& getStory(){
+			return storyText;
+		}
+};
 
 class Shop : public Room{};
 
