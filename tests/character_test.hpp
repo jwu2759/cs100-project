@@ -8,12 +8,13 @@
 #include "../header/factory.hpp"
 
 TEST(CharacterTest, PlayerNameCheck){
-std::string ryan = "Ryan";
-int weapon = 1;
-Character* MyMan = new Player (ryan, weapon);
+//std::string ryan = "Ryan";
+//int weapon = 1;
+Character* MyMan = new Player ("Ryan", 1);
 
 EXPECT_EQ(MyMan->getName(),"Ryan" );
 }
+
 
 TEST(CharacterTest, PlayerHealthCheck){
 	std::string ryan = "Ryan";
@@ -68,7 +69,7 @@ TEST(WeaponTest, WeaponDamageCheck2){
         Character* MyMan = new Player (karan, weapon);
 
 
-EXPECT_EQ(MyMan->weaponDamage(),10 );
+EXPECT_EQ(MyMan->weaponDamage(),3 );
 }
 
 TEST(WeaponTest, WeaponPhraseCheck3){
@@ -133,7 +134,7 @@ Character* enemy = new Enemy (ryan, weapon2);
 
 enemy->attack(MyMan);
 
-EXPECT_EQ(MyMan->getHealth(), 90 );
+EXPECT_EQ(MyMan->getHealth(), 97 );
 }
 
 TEST(AttackTest, AttackCheck4){
@@ -148,7 +149,7 @@ Character* enemy = new Enemy (ryan, weapon2);
 
 enemy->attack(MyMan);
 
-EXPECT_EQ(MyMan->getHealth(), 90 );
+EXPECT_EQ(MyMan->getHealth(), 97 );
 }
 
 TEST(AbilityTest, AbilityCheck1){
@@ -163,8 +164,9 @@ Character* enemy = new Enemy (ryan, weapon2);
 
 MyMan->ability(enemy);
 
-EXPECT_EQ(enemy->getHealth(), 85 );
+EXPECT_EQ(enemy->getHealth(), 94 );
 }
+
 
 TEST(AbilityTest, AbilityCheck2){
 std::string jason = "Jason";
@@ -206,12 +208,14 @@ int weapon = 1;
 
 int weapon2 = 3;
 
-Character* enemy = new Enemy (mc1, weapon);
-Character* mc = new Player (mc2, weapon2);
+Character* enemy = new Enemy (mc1, weapon2);
+Character* mc = new Player (mc2, weapon);
 
 enemy->ability(mc);
 enemy->attack(mc);
 
-EXPECT_EQ(mc->getHealth(), 72 );
+EXPECT_EQ(mc->getHealth(), 94 );
 }
+
+
 #endif
