@@ -20,6 +20,7 @@ class Character{
 	public:
 		virtual void attack(Character* target) = 0;
 		virtual void ability(Character* target) = 0;
+		virtual void defend() = 0;
 	
 		int getHealth (){
 			return currHealth;
@@ -69,6 +70,22 @@ class Player : public Character{
 
 		}
 
+		virtual void defend(){
+			cout << name << " is defending!" <<endl;
+
+			if (currHealth < 95 ){
+                                currHealth = currHealth + 5;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else if (currHealth < 100 ){
+                                currHealth = 100;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else {
+                                cout << name << " is already at max health!" << endl;
+                        }
+		}
+		
 
 };
 
@@ -98,6 +115,21 @@ class Enemy : public Character{
                         cout << name << " is using their buff ability for permanent damage!" << endl;
 			
 		}
+		
+		virtual void defend(){
+                        cout << name << " is defending!" <<endl;
+			if (currHealth < 97 ){
+                        	currHealth = currHealth + 3;
+				cout << name << "'s current health: " << currHealth << endl;
+			}
+			else if (currHealth < 100 ){
+				currHealth = 100;
+                        	cout << name << "'s current health: " << currHealth << endl;
+			}
+			else {
+				cout << name << " is already at max health!" << endl;
+			}
+                }
 
 };
 
@@ -125,6 +157,24 @@ class Ally : public Character{
 			else{
 				target->setHealth(100);
 			}
+                }
+		
+		virtual void defend(){
+                        cout << name << " is defending!" <<endl;
+                        currHealth = currHealth + 10;
+                        cout << name << "'s current health: " << currHealth << endl;
+			cout << name << " is defending!" <<endl;
+                        if (currHealth < 90 ){
+                                currHealth = currHealth + 3;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else if (currHealth < 100 ){
+                                currHealth = 100;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else {
+                                cout << name << " is already at max health!" << endl;
+                        }
                 }
 
 };
