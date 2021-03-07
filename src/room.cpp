@@ -14,12 +14,12 @@ Room* Room::getNext(){
 
 Battle::Battle(){
 	//FIXME: CALL THE ENEMY CONSTRUCTOR AND MAKE THE ENEMY VECTOR WITH CREATED ENEMY OBJECTS
-	int enemyMax = 10;
+	int enemyMax = 15;
 	int enemyCount = rand() % enemyMax;
 	string enemyName;
 	for(int i = 0; i < enemyCount; ++i){
 		enemyName = "Ghost" + to_string(i + 1);
-		enemies.push_back(new Enemy(enemyName, rand() % 3));
+		enemies.push_back(new Enemy(enemyName, rand() % 3 + 1));
 	}
 }
 Battle::~Battle(){
@@ -119,28 +119,15 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			//FIXME: ADD SOME DEFENSE STRATEGY a->defend();
 			def1 = false;
 		}
-		//then ally
-		//FIXME: IMPLEMENT THE ENEMY ATTACKING SYSTEM
-		//FOR EVERY ENEMY IN ENEMIES
-			// PICK A TARGET
-			// ATTACK THAT TARGET
-		int enemyTarget;
-		for(int i = 0; i < enemies.size(); ++i){
-			enemyTarget = rand() % 2 + 1;
-			if(enemyTarget == 1){	//attack the player
-				enemies.at(i)->attack(p);
-			}
-			else if(enemyTarget == 2)	//attack the ally
-				if(a->getHealth() > 0){
-					enemies.at(i)->attack(a);
-				}
-		}
-		if(p->getHealth() <= 0){
-			cout << "YOU DIED, GAME OVER." << endl;
-			exit(1);
-		}
-		if(a->getHealth() <= 0){
-			cout << a->getName() << " HAS DIED." << endl;
+		int targetNum;
+		for(auto x : enemies){
+			targetNum = rand() % 3;
+			if(targetNum == 0)
+				x->attack(p);
+			else if(targetNum == 1)
+				x->attack(a);
+			else if(targetNum == 2)
+				x->ability(x);
 		}
 	}
 }

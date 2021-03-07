@@ -105,7 +105,7 @@ class Ally : public Character{
                 }
 
                 virtual void attack(Character* target){
-			cout << name << " " << w->getPhrase() << " "<< target->getName() << "!";
+			cout << name << " " << w->getPhrase() << " "<< target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
 		}
 			//ally heal ability
