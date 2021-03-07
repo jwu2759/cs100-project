@@ -118,7 +118,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			def = false;
 		}
 		//these will all be false if the ally is dead, picking sequence will not happen.
-		if(atk1){
+		if(atk1 && target2){
 			a->attack(target2);
 			if(target2->getHealth() <= 0){
 				iter = enemies.begin();
