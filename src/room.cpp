@@ -128,6 +128,13 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				x->attack(a);
 			else if(targetNum == 2)
 				x->ability(x);
+			if(p->getHealth() <= 0){
+				std::cout << "You died, game over." << std::endl;
+				exit(1);
+			}
+			if(a->getHealth() <= 0){
+				std::cout << a->getName() << " has died." << std::endl;
+			}
 		}
 	}
 }
