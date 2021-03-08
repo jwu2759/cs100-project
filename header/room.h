@@ -24,7 +24,13 @@ class Battle : public Room{
 	private:
 		vector<Enemy*> enemies;
 		bool clear();	//returns if room is cleared, if enemies is empty return true
-		string BattleText;	//add more strings as needed for Battle.
+		string BattleText;	//add more strings as needed for Battle.	
+		void outCurrent(){
+			for(int i = 0; i < enemies.size(); ++i){
+				Enemy* e = enemies.at(i);
+				cout << "[" << e->getName() << " || " << e->getHealth() << " HP" << " || " << e->weaponDamage() << "ATK ]" << endl;
+			}
+		}
 	public:
 		Battle();
 		~Battle();
