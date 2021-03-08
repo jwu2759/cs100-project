@@ -12,8 +12,8 @@ using namespace std;
 class Character{
 	protected:
 		Weapon* w;
-		int money;
-
+		int money = 100;
+		int potion = 2;
 		int currHealth = 100;
 
 		std::string name;
@@ -40,8 +40,22 @@ class Character{
 		int weaponDamage(){
 			return w->getAttack();
 		}
-		
-
+		//for shop
+		int getMoney(){return money;}
+		void setMoney(int x){money = x;}
+		int getPotion(){return potion;}
+		void setPotion(int x){potion = x;}
+		void upgradeWeapon(){
+			w->setAttack(w->getAttack()+5);
+		}
+		void consume(){
+			if(potion == 0){
+				cout << "You do not have any potions." << endl;
+			}else{
+				currHealth += 50;
+				potion--;
+			}
+		}
 };
 
 class Player : public Character{

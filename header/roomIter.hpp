@@ -25,6 +25,10 @@ class RoomIter{
 				Story* s = dynamic_cast<Story*>(currRoom);
 				cout << s->getStory() << endl;
 			}
+			else if(dynamic_cast<Shop*>(currRoom)){
+				Shop* s = dynamic_cast<Shop*>(currRoom);
+				s->display(p);
+			}
 		}
 		void next(){
 			Room* temp = currRoom;

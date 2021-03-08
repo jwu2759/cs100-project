@@ -42,6 +42,9 @@ class Story : public Room{
 		}
 };
 
-class Shop : public Room{};
+class Shop : public Room{
+	public:
+		void display(Player* p);
+};
 
 #endif
