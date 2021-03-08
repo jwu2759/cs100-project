@@ -13,12 +13,12 @@ int main(){
 	Battle* Battle1 = new Battle();
 	Story* Story2 = new Story("Nvm this story sux 0/10 would not play again.");
 	Shop* shop = new Shop();
-	RoomIter iter(Story1, user, comp);
+	RoomIter iter(Story1);
 	Story1->setNext(Battle1);
 	Battle1->setNext(Story2);
 	Story2->setNext(shop);
 	while(!iter.isDone()){
-		iter.execute();
+		iter.execute(user,comp);
 		iter.next();
 	}
 	delete user;

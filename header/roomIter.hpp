@@ -5,30 +5,15 @@
 class RoomIter{
 	private:
 		Room* currRoom = nullptr;
-		Player* p = nullptr;
-		Ally* a = nullptr;
 	public:
-		RoomIter(Room* r, Player* p, Ally* a){
+		RoomIter(Room* r){
 			currRoom = r;
-			this->p = p;
-			this->a = a;
 		}
 		bool isDone(){
 			return currRoom == nullptr;
 		}
-		void execute(){
-			if(dynamic_cast<Battle*>(currRoom)){
-				Battle* b = dynamic_cast<Battle*>(currRoom);
-				b->fight(p,a);
-			}
-			else if(dynamic_cast<Story*>(currRoom)){
-				Story* s = dynamic_cast<Story*>(currRoom);
-				cout << s->getStory() << endl;
-			}
-			else if(dynamic_cast<Shop*>(currRoom)){
-				Shop* s = dynamic_cast<Shop*>(currRoom);
-				s->display(p);
-			}
+		void execute(Player* p, Ally* a){
+			currRoom->execute(p,a);
 		}
 		void next(){
 			Room* temp = currRoom;

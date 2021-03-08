@@ -20,6 +20,7 @@ class Character{
 	public:
 		virtual void attack(Character* target) = 0;
 		virtual void ability(Character* target) = 0;
+		virtual void defend() = 0;
 	
 		int getHealth (){
 			return currHealth;
@@ -56,6 +57,11 @@ class Character{
 				potion--;
 			}
 		}
+		~Character(){
+			delete w;
+		}
+
+
 };
 
 class Player : public Character{
@@ -73,14 +79,32 @@ class Player : public Character{
 			if(!target) return;
 			cout << name << " " << w->getPhrase() << " " << target->getName() << "!" << endl;
 			target->setHealth( (target->getHealth()) - (w->getAttack()) );
+			cout << target->getName() << " has " << target->getHealth() << " HP left!" << endl;
 		}
 			//random damage ability
 		virtual void ability(Character* target){
-			int rand = (w->getAttack() % 20) + 10 ;
-			cout << name << " is charing their attack ability!" << endl;
-			cout << "Amount charged: " << rand << endl;
+			int rand = (w->getAttack() % 6) + 5 ;
                         target->setHealth( ((target->getHealth()) - rand) );
+			cout << target->getName() << " has "<< target->getHealth() << " HP left!"  << endl;
+
 		}
+
+		virtual void defend(){
+			cout << name << " is defending!" <<endl;
+
+			if (currHealth < 95 ){
+                                currHealth = currHealth + 5;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else if (currHealth < 100 ){
+                                currHealth = 100;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else {
+                                cout << name << " is already at max health!" << endl;
+                        }
+		}
+		
 
 };
 
@@ -101,20 +125,37 @@ class Enemy : public Character{
 			if(!target) return;
 			cout << name << " " << w->getPhrase() << " " << target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
+			cout << target->getName() << " has " << target->getHealth() << " HP left!" << endl;
 
 		}
 			//Enemy buff ability
 		virtual void ability(Character* target){
                         w->setAttack( w->getAttack() + 3 );
                         cout << name << " is using their buff ability for permanent damage!" << endl;
+			
 		}
+		
+		virtual void defend(){
+                        cout << name << " is defending!" <<endl;
+			if (currHealth < 97 ){
+                        	currHealth = currHealth + 3;
+				cout << name << "'s current health: " << currHealth << endl;
+			}
+			else if (currHealth < 100 ){
+				currHealth = 100;
+                        	cout << name << "'s current health: " << currHealth << endl;
+			}
+			else {
+				cout << name << " is already at max health!" << endl;
+			}
+                }
 
 };
 
 class Ally : public Character{
         private:
         public:
-                Ally (const string userName, int wepType){
+                Ally (const string& userName, int wepType){
                         name = userName;
 			Factory wepMaker;
                         w = wepMaker.create(wepType);
@@ -123,16 +164,34 @@ class Ally : public Character{
 			if(!target) return;
 			cout << name << " " << w->getPhrase() << " "<< target->getName() << "!" << endl;
                         target->setHealth( (target->getHealth()) - (w->getAttack()) );
+			cout << target->getName() << " has " << target->getHealth() << " HP left!" << endl;
 		}
 			//ally heal ability
 		virtual void ability(Character* target){
                         cout << name << " is using their heal ability on " << target->getName() << "!" << endl;
-			if ( (target->getHealth()) < 90){
-				target->setHealth( (target->getHealth() + 10) );
+			if ( (target->getHealth()) < 85){
+				target->setHealth( (target->getHealth() + 15) );
 			}
 			else{
 				target->setHealth(100);
 			}
+			cout << target->getName() << "'s current health: " << target->getHealth() << endl;
+                }
+		
+		virtual void defend(){
+
+			cout << name << " is defending!" <<endl;
+                        if (currHealth < 90 ){
+                                currHealth = currHealth + 10;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else if (currHealth < 100 ){
+                                currHealth = 100;
+                                cout << name << "'s current health: " << currHealth << endl;
+                        }
+                        else {
+                                cout << name << " is already at max health!" << endl;
+                        }
                 }
 
 };
