@@ -17,7 +17,7 @@ class Room{
 		virtual ~Room() = default;
 		void setNext(Room* r);
 		Room* getNext();
-		virtual void execute(Player* p, Ally* a) = 0;
+		virtual bool execute(Player* p, Ally* a) = 0;
 };
 
 class Battle : public Room{
@@ -28,9 +28,27 @@ class Battle : public Room{
 	public:
 		Battle();
 		~Battle();
-		void fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
-		void execute(Player* p, Ally* a){
-			fight(p,a);
+		bool fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
+		bool execute(Player* p, Ally* a){
+			bool pass = fight(p,a);
+			string input;
+			while(!pass){
+				cout << "Restart from where you left off?" << endl << "( 1 ) Yes" << endl << "( 2 ) No" << endl;
+				cin >> input;
+				if(input == "1"){
+					p->setHealth(100);
+					a->setHealth(100);
+					pass = fight(p,a);
+				}
+				else if(input == "2"){
+					cout << "GAME OVER" << endl;
+					return false;
+				}
+				else
+					cout << "Invalid input, try again." << endl;
+			}
+			//REWARD PLAYER
+			return true;
 		}
 };
 
@@ -44,8 +62,9 @@ class Story : public Room{
 		const string& getStory(){
 			return storyText;
 		}
-		void execute(Player* p, Ally* a){
+		bool execute(Player* p, Ally* a){
 			cout << getStory() << endl;
+			return true;
 		}
 };
 

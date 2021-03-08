@@ -12,8 +12,8 @@ class RoomIter{
 		bool isDone(){
 			return currRoom == nullptr;
 		}
-		void execute(Player* p, Ally* a){
-			currRoom->execute(p,a);
+		bool execute(Player* p, Ally* a){
+			return currRoom->execute(p,a);
 		}
 		void next(){
 			Room* temp = currRoom;

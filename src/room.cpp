@@ -28,8 +28,25 @@ Battle::Battle(){
 	int enemyMax = 7;
 	int enemyCount = rand() % enemyMax + 1;
 	string enemyName;
+	int n1 = 0, n2 = 0, n3 = 0;
 	for(int i = 0; i < enemyCount; ++i){
-		enemyName = "Ghost" + to_string(i + 1);
+		int title = rand() % 3;
+		string name;
+		if(title == 0){
+			name = "Cheesy";
+			++n1;
+			enemyName = name + " " + to_string(n1);
+		}
+		else if(title == 1){
+			name = "Gordita";
+			++n2;
+			enemyName = name + " " + to_string(n2);
+		}
+		else if(title == 2){
+			name = "Crunch";
+			++n3;
+			enemyName = name + " " + to_string(n3);
+		}
 		enemies.push_back(new Enemy(enemyName, 3));
 	}
 }
@@ -41,7 +58,7 @@ Battle::~Battle(){
 bool Battle::clear(){	//returns if room is cleared, if enemies is empty return true
 	return enemies.empty();
 }
-void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while loop, sequence of fighting happens
+bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while loop, sequence of fighting happens
 	string temp;
 	bool atk = false, def = false, abi = false;
 	bool atk1 = false, def1 = false, abi1 = false;
@@ -52,9 +69,9 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		//actions of the player
 		while(!atk && !def && !abi){
 			cout << "What do you want to do?" << endl;
-			cout << "( 1 ) Attack" << endl;
-			cout << "( 2 ) Defend" << endl;
-			cout << "( 3 ) Ability" << endl;
+			cout << "\t( 1 ) Attack" << endl;
+			cout << "\t( 2 ) Defend" << endl;
+			cout << "\t( 3 ) Ability" << endl;
 			cin >> temp;
 			if(temp == "1"){
 				int value = -1;
@@ -62,7 +79,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				while(value == -1){
 					cout << "Attack who?" << endl;
 					for(int i = 0; i < enemies.size(); ++i){
-						cout << "( " <<  i + 1 << " ) " << enemies.at(i)->getName() << endl;
+						cout << "\t( " <<  i + 1 << " ) " << enemies.at(i)->getName() << endl;
 					}
 					cin >> value;
 					--value;
@@ -89,7 +106,6 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			//randomly decide
 		if(a->getHealth() > 0){
 			int allyChoice = rand() % 3;
-			cout << allyChoice << " CHOICE." << endl;
 			if(allyChoice == 0){
 				atk1 = true;
 				target2 = enemies.at(rand() % enemies.size());
@@ -156,7 +172,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				(*iter)->defend();
 			if(p->getHealth() <= 0){
 				cout << "You died, game over." << endl;
-				return;
+				return false;
 			}
 			if(a->getHealth() <= 0 && allyPrint){
 				cout << a->getName() << " is crippled beyond repair (can't fight anymore)." << endl;
@@ -165,6 +181,7 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		}
 	}
 	cout << "Room cleared!" << endl;
+	return true;
 }
 
 
