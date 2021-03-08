@@ -21,7 +21,7 @@ TEST(WepFactory, WepFactorySpear){
 TEST(WepFactory, WepFactoryAxe){
 	Factory f;
         Weapon* w = f.create(3);
-        EXPECT_EQ(w->getAttack(), 10);
+        EXPECT_EQ(w->getAttack(), 3);
         EXPECT_EQ(w->getPhrase(), "BONKED");
 }
 

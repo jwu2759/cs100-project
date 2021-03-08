@@ -77,6 +77,8 @@ class Story : public Room{
 };
 
 class Shop : public Room{
+	private:
+		void inventory(Player* p);
 	public:
 		void display(Player* p);
 		bool execute(Player* p, Ally* a){

@@ -4,3 +4,5 @@
 TEST(FightTest, Battle){
 	EXPECT_EQ(true, true);
 }
+
+

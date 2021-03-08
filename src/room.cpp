@@ -239,23 +239,27 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 	return true;
 }
 
+void Shop::inventory(Player* p){
+	cout << "\nInventory: " << p->getMoney() << "g || " << p->getPotion() << " Potions\n" << endl;
+}
 
 void Shop::display(Player* p){
 	string choice;
 	bool done = false;
 	system("clear");
 	cout << "*You come across a merchant.*" << endl;
-	sleep(2);
+	sleep(1);
 	while(!done){
 		cout << "Greetings Traveler." << endl;
         	cout << "( 1 ) Buy Potions" << endl;
         	cout << "( 2 ) Sell Potions" << endl;
        		cout << "( 3 ) Upgrade Weapon" << endl;
         	cout << "( 4 ) Leave" << endl;
+		inventory(p);
 		choice = "";
+		cout << "Enter a number: ";
 		cin >> choice;
 		int input = 0;
-		cout << "*You currently have " << p->getMoney() << " gold.*" << endl;
 		if(choice == "1"){ 
 			cout << "Each potion costs 50g. How many would you like?" << endl;
 			cin >> input;
@@ -264,6 +268,7 @@ void Shop::display(Player* p){
 			}else{
 				p->setMoney(p->getMoney() - input * 50);
 				p->setPotion(p->getPotion() + input);
+				cout << "*You now have " << p->getPotion() << " potions and " << p->getMoney() << " gold.*" << endl;
 			}
 		}else if(choice == "2"){
 			cout << "30g for each potion. How many do you want to sell?" << endl;
@@ -271,8 +276,9 @@ void Shop::display(Player* p){
 			if(input > p->getPotion()){
 				cout << "You do not have enough potions." << endl;
 			}else{
-				p->setPotion(p->getPotion()+input);
+				p->setPotion(p->getPotion()-input);
 				p->setMoney(p->getMoney() + input * 30);
+				cout << "*You now have " << p->getPotion() << " potions and " << p->getMoney() << " gold.*" << endl;
 			}
 		}else if(choice == "3"){
 			cout << "It costs 300g to upgrade your weapon. Are you sure you want to upgrade?" << endl;
@@ -283,6 +289,8 @@ void Shop::display(Player* p){
 				if(p->getMoney() > 300){
 					p->setMoney(p->getMoney()-300);
 					p->upgradeWeapon();
+					cout << "*Your weapon feels stronger.*" << endl;
+					cout << "*You now have " << p->getMoney() << " gold.*" << endl; 
 				}else{
 					cout << "You do not have sufficient gold." << endl;
 				}
@@ -293,6 +301,8 @@ void Shop::display(Player* p){
 		}else{
 			cout << "Invalid input, try again." << endl;
 		}
+		sleep(3);
+		system("clear");
 	}
 
 
