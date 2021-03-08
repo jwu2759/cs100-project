@@ -16,7 +16,8 @@ int main(){
 	Story1->setNext(Battle1);
 	Battle1->setNext(Story2);
 	while(!iter.isDone()){
-		iter.execute(user,comp);
+		if(!iter.execute(user,comp))
+			break;
 		iter.next();
 	}
 	delete user;
