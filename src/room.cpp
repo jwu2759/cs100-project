@@ -1,5 +1,7 @@
 #include "../header/room.h"
 
+using namespace std;
+
 Room::Room(){
 	nextRoom = nullptr;
 }
@@ -164,3 +166,70 @@ void Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 	}
 	cout << "Room cleared!" << endl;
 }
+
+
+void Shop::display(Player* p){
+	string choice;
+	bool done = false;
+	cout << "*You come across a merchant.*" << endl;
+	while(!done){
+		cout << "Greetings Traveler." << endl;
+        	cout << "( 1 ) Buy Potions" << endl;
+        	cout << "( 2 ) Sell Potions" << endl;
+       		cout << "( 3 ) Upgrade Weapon" << endl;
+        	cout << "( 4 ) Leave" << endl;
+		choice = "";
+		cin >> choice;
+		int input = 0;
+		cout << "*You currently have " << p->getMoney() << " gold.*" << endl;
+		if(choice == "1"){ 
+			cout << "Each potion costs 50g. How many would you like?" << endl;
+			cin >> input;
+			if(input*50 > p->getMoney()){
+				cout << "You do not have sufficient gold." << endl;
+			}else{
+				p->setMoney(p->getMoney() - input * 50);
+				p->setPotion(p->getPotion() + input);
+			}
+		}else if(choice == "2"){
+			cout << "30g for each potion. How many do you want to sell?" << endl;
+			cin >> input;
+			if(input > p->getPotion()){
+				cout << "You do no thave enough potions." << endl;
+			}else{
+				p->setPotion(p->getPotion()+input);
+				p->setMoney(p->getMoney() + input * 30);
+			}
+		}else if(choice == "3"){
+			cout << "It costs 300g to upgrade your weapon. Are you sure you want to upgrade?" << endl;
+			cout << "( 1 ) Yes" << endl;
+			cout << "( 2 ) No" << endl;
+			cin >> input;
+			if(input == 1){
+				if(p->getMoney() > 300){
+					p->setMoney(p->getMoney()-300);
+					p->upgradeWeapon();
+					done = true;
+				}else{
+					cout << "You do not have sufficient gold." << endl;
+				}
+			}
+		}else if(choice == "4"){
+			cout << "Goodbye." << endl;
+			done = true;
+		}else{
+			cout << "Invalid input, try again." << endl;
+		}
+	}
+
+
+}
+
+
+
+
+
+
+
+
+

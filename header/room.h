@@ -1,8 +1,10 @@
 #ifndef __ROOM_H__
 #define __ROOM_H__
 
+
 #include <bits/stdc++.h>
 #include "../header/character.hpp"
+
 
 using namespace std;
 
@@ -47,6 +49,9 @@ class Story : public Room{
 		}
 };
 
-class Shop : public Room{};
+class Shop : public Room{
+	public:
+		void display(Player* p);
+};
 
 #endif

@@ -360,4 +360,5 @@ EXPECT_EQ(MyMan->getHealth(), 76 );
 	delete MyMan;
 }
 
+
 #endif
