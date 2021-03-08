@@ -55,6 +55,8 @@ class Character{
 			}else{
 				currHealth += 50;
 				potion--;
+				cout << "*Your wounds begin to heal*" << endl;
+				cout << "*You restored 50 hp*" << endl;
 			}
 		}
 		~Character(){
