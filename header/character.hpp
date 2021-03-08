@@ -65,7 +65,6 @@ class Character{
 };
 
 class Player : public Character{
-	private:
 	public:
 		Player (const string& userName, int wepType){
 			name = userName;
