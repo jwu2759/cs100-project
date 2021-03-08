@@ -2,6 +2,7 @@
 #define __WEAPON_HPP__
 
 #include <string>
+#include <unistd.h>
 
 class Weapon{
 	protected:

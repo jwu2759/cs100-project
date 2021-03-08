@@ -59,20 +59,25 @@ bool Battle::clear(){	//returns if room is cleared, if enemies is empty return t
 	return enemies.empty();
 }
 bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while loop, sequence of fighting happens
+	system("clear");
 	string temp;
 	bool atk = false, def = false, abi = false;
 	bool atk1 = false, def1 = false, abi1 = false;
+	bool god = false;
 	bool allyPrint = true;
 	Enemy *target1, *target2;
 	vector<Enemy*>::iterator iter;
 	while(!clear()){
 		//actions of the player
-		while(!atk && !def && !abi){
+		while(!atk && !def && !abi && !god){
+			outCurrent();
 			cout << "What do you want to do?" << endl;
 			cout << "\t( 1 ) Attack" << endl;
 			cout << "\t( 2 ) Defend" << endl;
 			cout << "\t( 3 ) Ability" << endl;
+			cout << "Enter a number: ";
 			cin >> temp;
+			system("clear");
 			if(temp == "1"){
 				int value = -1;
 				atk = true;
@@ -81,6 +86,7 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 					for(int i = 0; i < enemies.size(); ++i){
 						cout << "\t( " <<  i + 1 << " ) " << enemies.at(i)->getName() << endl;
 					}
+					cout << "Enter a number: ";
 					cin >> value;
 					--value;
 					if(value < enemies.size() && value >= 0){
@@ -89,6 +95,7 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 					else{
 						cout << "Invalid input, try again." << endl;
 						value = -1;
+						sleep(2);
 					}
 				}
 			}
@@ -98,9 +105,14 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			else if(temp == "3"){
 				abi = true;
 			}
+			else if(temp == "god"){
+				god = true;
+			}
 			else{
 				cout << "Invalid Input, try again." << endl;
-			}
+				sleep(2);
+			}	
+			system("clear");
 		}
 		//actions of the ally
 			//randomly decide
@@ -120,25 +132,43 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		//team attacks first
 		if(atk){
 			p->attack(target1);
+			sleep(1);
 			atk = false;
 		}
 		else if(def){
 			p->defend();
+			sleep(1);
 			def = false;
 		}
 		else if(abi){
 			cout << p->getName() << " used Cleave!" << endl;
 			for(auto x : enemies)
 				p->ability(x);
+			sleep(1);
 			abi = false;
+		}
+		else if(god){
+			cout << "~ THE GODS ARE BY YOUR SIDE ~" << endl;
+			sleep(1);
+			Ally* gods = new Ally("The Gods", 1);
+			for(int i = 0; i < 195; ++i){
+				gods->upgradeWeapon();
+			}
+			for(iter = enemies.begin(); iter != enemies.end(); ++iter){
+				gods->attack(*iter);
+				sleep(1);
+			}
+			delete gods;
 		}
 		//these will all be false if the ally is dead, picking sequence will not happen.
 		if(atk1){
 			a->attack(target2);
+			sleep(1);
 			atk1 = false;
 		}
 		else if(def1){
 			a->defend();
+			sleep(1);
 			def1 = false;
 		}
 		else if(abi1){
@@ -146,14 +176,17 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				a->ability(p);
 			else
 				a->ability(a);
+			sleep(1);
 			abi1 = false;
 		}
 		//check Afor dead targets, and remove them
 		iter = enemies.begin();
 		while(iter != enemies.end()){
 			if((*iter)->getHealth() <= 0){
+				cout << (*iter)->getName() << " is dead!" << endl;
 				delete *iter;
 				enemies.erase(iter);
+				sleep(1);
 			}	
 			else{
 				++iter;
@@ -170,17 +203,21 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				(*iter)->ability(*iter);
 			else if(targetNum == 3)
 				(*iter)->defend();
+			sleep(1);
 			if(p->getHealth() <= 0){
 				cout << "You died, game over." << endl;
+				sleep(1);
 				return false;
 			}
 			if(a->getHealth() <= 0 && allyPrint){
 				cout << a->getName() << " is crippled beyond repair (can't fight anymore)." << endl;
+				sleep(1);
 				allyPrint = false;
 			}
 		}
 	}
 	cout << "Room cleared!" << endl;
+	sleep(1);
 	return true;
 }
 
