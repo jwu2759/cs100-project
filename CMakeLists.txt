@@ -9,9 +9,6 @@ ADD_EXECUTABLE(
 	./tests/test.cpp
 	./tests/room_test.hpp
 	./src/room.cpp
-	./tests/factory_test.hpp
-	./header/factory.hpp
-	./header/weapon.hpp
 )
 
 ADD_EXECUTABLE(
