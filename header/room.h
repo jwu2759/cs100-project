@@ -71,6 +71,10 @@ class Story : public Room{
 class Shop : public Room{
 	public:
 		void display(Player* p);
+		bool execute(Player* p, Ally* a){
+			display(p);
+			return true;
+		}
 };
 
 #endif
