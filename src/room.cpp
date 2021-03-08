@@ -24,7 +24,6 @@ Room* Room::getNext(){
 }
 
 Battle::Battle(){
-	//FIXME: CALL THE ENEMY CONSTRUCTOR AND MAKE THE ENEMY VECTOR WITH CREATED ENEMY OBJECTS
 	int enemyMax = 7;
 	int enemyCount = rand() % enemyMax + 1;
 	string enemyName;
@@ -70,11 +69,15 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 	while(!clear()){
 		//actions of the player
 		while(!atk && !def && !abi && !god){
+			cout << "   What do you want to do?   " << endl;
+			cout << "( 1 ) Attack - deal " << p->weaponDamage() << " to 1 target." << endl << 
+				"( 2 ) Defend - gain 10 health up to 100 health." << endl << 
+				"( 3 ) Ability - deal damage to all enemies." << endl <<
+				"( 4 ) Use Potion - You have: " << p->getPotion() << " potions." << endl << endl;
 			outCurrent();
-			cout << "What do you want to do?" << endl;
-			cout << "\t( 1 ) Attack" << endl;
-			cout << "\t( 2 ) Defend" << endl;
-			cout << "\t( 3 ) Ability" << endl;
+			cout << "YOUR PARTY:" << endl;
+			cout << p->getName() << ": " << p->getHealth() << "HP || " << p->weaponDamage() << " ATK" << endl;
+			cout << a->getName() << ": " << a->getHealth() << "HP || " << a->weaponDamage() << " ATK" << endl << endl;
 			cout << "Enter a number: ";
 			cin >> temp;
 			system("clear");
@@ -84,18 +87,25 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				while(value == -1){
 					cout << "Attack who?" << endl;
 					for(int i = 0; i < enemies.size(); ++i){
-						cout << "\t( " <<  i + 1 << " ) " << enemies.at(i)->getName() << endl;
+						cout << "( " <<  i + 1 << " ) " << enemies.at(i)->getName() << " - " << enemies.at(i)->getHealth() << " HP" << endl;
 					}
 					cout << "Enter a number: ";
-					cin >> value;
+					cin >> temp;
+					for(int i = 0; i < temp.size(); ++i){
+						if(!isdigit(temp[i]))
+							goto INVALID;
+					}
+					value = stoi(temp);
 					--value;
+					INVALID:
 					if(value < enemies.size() && value >= 0){
 						target1 = enemies.at(value);
 					}
 					else{
 						cout << "Invalid input, try again." << endl;
 						value = -1;
-						sleep(2);
+						sleep(1);
+						system("clear");
 					}
 				}
 			}
@@ -104,6 +114,11 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 			}
 			else if(temp == "3"){
 				abi = true;
+			}
+			else if (temp == "4"){
+				//ADD TEXT IN CONSUME
+				p->consume();
+				sleep(2);
 			}
 			else if(temp == "god"){
 				god = true;
@@ -183,7 +198,9 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		iter = enemies.begin();
 		while(iter != enemies.end()){
 			if((*iter)->getHealth() <= 0){
-				cout << (*iter)->getName() << " is dead!" << endl;
+				int money = rand() % 30 + 1;
+				cout << (*iter)->getName() << " is dead! You gained " << money << " gold!" << endl;
+				p->setMoney(p->getMoney() + money);
 				delete *iter;
 				enemies.erase(iter);
 				sleep(1);
@@ -215,6 +232,7 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				allyPrint = false;
 			}
 		}
+		cout << endl;
 	}
 	cout << "Room cleared!" << endl;
 	sleep(1);
@@ -225,7 +243,9 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 void Shop::display(Player* p){
 	string choice;
 	bool done = false;
+	system("clear");
 	cout << "*You come across a merchant.*" << endl;
+	sleep(2);
 	while(!done){
 		cout << "Greetings Traveler." << endl;
         	cout << "( 1 ) Buy Potions" << endl;
@@ -249,7 +269,7 @@ void Shop::display(Player* p){
 			cout << "30g for each potion. How many do you want to sell?" << endl;
 			cin >> input;
 			if(input > p->getPotion()){
-				cout << "You do no thave enough potions." << endl;
+				cout << "You do not have enough potions." << endl;
 			}else{
 				p->setPotion(p->getPotion()+input);
 				p->setMoney(p->getMoney() + input * 30);
@@ -263,7 +283,6 @@ void Shop::display(Player* p){
 				if(p->getMoney() > 300){
 					p->setMoney(p->getMoney()-300);
 					p->upgradeWeapon();
-					done = true;
 				}else{
 					cout << "You do not have sufficient gold." << endl;
 				}
