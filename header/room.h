@@ -26,15 +26,33 @@ class Battle : public Room{
 		bool clear();	//returns if room is cleared, if enemies is empty return true
 		string BattleText;	//add more strings as needed for Battle.	
 		void outCurrent(){
-			cout << "ENEMIES REMAINING:" << endl;
+			cout << "- ENEMIES REMAINING -" << endl;
 			for(int i = 0; i < enemies.size(); ++i){
 				Enemy* e = enemies.at(i);
 				cout << e->getName() << ": " << e->getHealth() << " HP" << " || " << e->weaponDamage() << " ATK" << endl;
 			}
 			cout << endl;
 		}
+		void levelUp(Player* p, Ally* a){
+			int prevDamage = p->weaponDamage();
+			p->upgradeWeapon();
+			cout << p->getName() << "'s weapon has been upgraded! " << prevDamage << "->" << p->weaponDamage() << "ATK" << endl;
+			sleep(1);	
+			int prevAbi = p->getAbiBase();
+			p->upgradeAbi();
+			cout << p->getName() << "'s cleave damage has been increased! " << prevAbi << "->" << p->getAbiBase() << "ATK" << endl;
+			sleep(1);	
+			int allyDamage = a->weaponDamage();
+			a->upgradeWeapon();
+			cout << a->getName() << "'s weapon has been upgraded! " << allyDamage << "->" << a->weaponDamage() << "ATK" << endl;
+			sleep(1);	
+			int healPrev = a->getHealBase();
+			a->upgradeHeal();
+			cout << a->getName() << "'s ability healing has been increased! " << healPrev << "->" << a->getHealBase() << "HP" << endl;
+			sleep(4);	
+		}
 	public:
-		Battle();
+		Battle(int);
 		~Battle();
 		bool fight(Player* p, Ally* a);	//call clear in a while loop, in while loop, sequence of fighting happens
 		bool execute(Player* p, Ally* a){
@@ -56,6 +74,7 @@ class Battle : public Room{
 					cout << "Invalid input, try again." << endl;
 			}
 			//REWARD PLAYER
+			levelUp(p,a);
 			return true;
 		}
 };
@@ -71,7 +90,12 @@ class Story : public Room{
 			return storyText;
 		}
 		bool execute(Player* p, Ally* a){
+			system("clear");
+			string temp;
 			cout << getStory() << endl;
+			do{
+				cout << '\n' << "Press ENTER to continue...";
+			} while(cin.get() != '\n');
 			return true;
 		}
 };

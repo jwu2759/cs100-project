@@ -23,8 +23,9 @@ Room* Room::getNext(){
 	return nextRoom;
 }
 
-Battle::Battle(){
-	int enemyMax = 7;
+//random constructor
+Battle::Battle(int eCount){
+	int enemyMax = eCount;
 	int enemyCount = rand() % enemyMax + 1;
 	string enemyName;
 	int n1 = 0, n2 = 0, n3 = 0;
@@ -69,13 +70,15 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 	while(!clear()){
 		//actions of the player
 		while(!atk && !def && !abi && !god){
-			cout << "   What do you want to do?   " << endl;
+			cout << "- What do you want to do? -" << endl;
 			cout << "( 1 ) Attack - deal " << p->weaponDamage() << " to 1 target." << endl << 
 				"( 2 ) Defend - gain 10 health up to 100 health." << endl << 
 				"( 3 ) Ability - deal damage to all enemies." << endl <<
 				"( 4 ) Use Potion - You have: " << p->getPotion() << " potions." << endl << endl;
+			sleep(1);
 			outCurrent();
-			cout << "YOUR PARTY:" << endl;
+			sleep(1);
+			cout << "- YOUR PARTY -" << endl;
 			cout << p->getName() << ": " << p->getHealth() << "HP || " << p->weaponDamage() << " ATK" << endl;
 			cout << a->getName() << ": " << a->getHealth() << "HP || " << a->weaponDamage() << " ATK" << endl << endl;
 			cout << "Enter a number: ";
@@ -85,7 +88,7 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				int value = -1;
 				atk = true;
 				while(value == -1){
-					cout << "Attack who?" << endl;
+					cout << "- Attack who? -" << endl;
 					for(int i = 0; i < enemies.size(); ++i){
 						cout << "( " <<  i + 1 << " ) " << enemies.at(i)->getName() << " - " << enemies.at(i)->getHealth() << " HP" << endl;
 					}
@@ -116,12 +119,18 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				abi = true;
 			}
 			else if (temp == "4"){
-				//ADD TEXT IN CONSUME
 				p->consume();
 				sleep(2);
 			}
 			else if(temp == "god"){
 				god = true;
+			}
+			else if(temp == "killme"){
+				cout << "As you attempt to slash the enemy you drop your blade on your foot and bleed to death." << endl;
+				sleep(2);
+				p->setHealth(0);
+				a->setHealth(0);
+				return false;
 			}
 			else{
 				cout << "Invalid Input, try again." << endl;
@@ -199,7 +208,12 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		while(iter != enemies.end()){
 			if((*iter)->getHealth() <= 0){
 				int money = rand() % 30 + 1;
-				cout << (*iter)->getName() << " is dead! You gained " << money << " gold!" << endl;
+				int potion = rand() % 4;
+				cout << (*iter)->getName() << " is dead! You gained " << money << "g!" << endl;
+				if(potion == 0){
+					cout << "\t" << (*iter)->getName() << " dropped a potion!" << endl;
+					p->setPotion(p->getPotion() + 1);
+				}
 				p->setMoney(p->getMoney() + money);
 				delete *iter;
 				enemies.erase(iter);
@@ -234,7 +248,8 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		}
 		cout << endl;
 	}
-	cout << "Room cleared!" << endl;
+	system("clear");
+	cout << "~ Room cleared! ~" << endl;
 	sleep(1);
 	return true;
 }
