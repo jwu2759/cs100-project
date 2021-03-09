@@ -4,9 +4,7 @@
 #include "weapon.hpp"
 #include "factory.hpp"
 
-#include <iostream>
-#include <string>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class Character{
@@ -67,7 +65,15 @@ class Character{
 };
 
 class Player : public Character{
+	private:
+		int abiBase = 5;
 	public:
+		int getAbiBase(){
+			return abiBase;
+		}
+		void upgradeAbi(){
+			abiBase += 2;
+		}
 		Player (const string& userName, int wepType){
 			name = userName;
 			Factory wepMaker;
@@ -84,8 +90,8 @@ class Player : public Character{
 		}
 			//random damage ability
 		virtual void ability(Character* target){
-			int rand = (w->getAttack() % 6) + 5 ;
-                        target->setHealth( ((target->getHealth()) - rand) );
+			int damage = (rand() % 6) + abiBase;
+                        target->setHealth( ((target->getHealth()) - damage) );
 			cout << target->getName() << " has "<< target->getHealth() << " HP left!"  << endl;
 
 		}
@@ -155,7 +161,14 @@ class Enemy : public Character{
 
 class Ally : public Character{
         private:
+		int healBase = 15;
         public:
+		int getHealBase(){
+			return healBase;
+		}
+		void upgradeHeal(){
+			healBase += 5;
+		}
                 Ally (const string& userName, int wepType){
                         name = userName;
 			Factory wepMaker;
@@ -170,8 +183,8 @@ class Ally : public Character{
 			//ally heal ability
 		virtual void ability(Character* target){
                         cout << name << " is using their heal ability on " << target->getName() << "!" << endl;
-			if ( (target->getHealth()) < 85){
-				target->setHealth( (target->getHealth() + 15) );
+			if ( (target->getHealth()) < 100-healBase){
+				target->setHealth( (target->getHealth() + healBase) );
 			}
 			else{
 				target->setHealth(100);
