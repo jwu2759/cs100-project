@@ -24,9 +24,9 @@ Room* Room::getNext(){
 }
 
 //random constructor
-Battle::Battle(int eCount){
-	int enemyMax = eCount;
-	int enemyCount = rand() % enemyMax + 1;
+Battle::Battle(int eCount, Room* r){
+	nextRoom = r;
+	int enemyCount = eCount;
 	string enemyName;
 	int n1 = 0, n2 = 0, n3 = 0;
 	for(int i = 0; i < enemyCount; ++i){
@@ -122,7 +122,7 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 				p->consume();
 				sleep(2);
 			}
-			else if(temp == "god"){
+			else if(temp == "givemegodofwar"){
 				god = true;
 			}
 			else if(temp == "killme"){
@@ -248,6 +248,81 @@ bool Battle::fight(Player* p, Ally* a){	//call clear in a while loop, in while l
 		}
 		cout << endl;
 	}
+	sleep(2);
+	system("clear");
+	cout << "~ Room cleared! ~" << endl;
+	sleep(1);
+	return true;
+}
+
+bool AllyBattle::fight(Player* p, Ally* a){	
+	system("clear");
+	string temp;
+	bool atk = false;
+	bool god = false;
+	while(a->getHealth() > 0){
+		//actions of the player
+		while(!atk && !god){
+			cout << "- What do you want to do? -" << endl;
+			cout << "( 1 ) Attack - deal " << p->weaponDamage() << " to " << a->getName() << endl;
+			sleep(1);
+			cout << "- ENEMIES REMAINING -" << endl;
+			cout << a->getName() << ": " << a->getHealth() << "HP || " << a->weaponDamage() << " ATK" << endl << endl;
+			cout << "- YOUR PARTY -" << endl;
+			cout << p->getName() << ": " << p->getHealth() << "HP || " << p->weaponDamage() << " ATK" << endl;
+			cout << "Enter a number: ";
+			cin >> temp;
+			system("clear");
+			if(temp == "1"){
+				int value = -1;
+				atk = true;
+				while(value == -1){
+					cout << "- Attack who? -" << endl;
+					cout << "( 1 ) " << a->getName() << ": " << a->getHealth() << "HP"<< endl << endl;
+					cout << "Enter a number: ";
+					cin >> temp;
+					if(temp != "1"){
+						cout << "Invalid input, try again." << endl;
+						value = -1;
+						sleep(1);
+						system("clear");
+					}
+					else{
+						value = 1;
+					}
+				}
+			}
+			else if(temp == "givemegodofwar"){
+				god = true;
+			}
+			else{
+				cout << "Invalid Input, try again." << endl;
+				sleep(2);
+			}	
+			system("clear");
+		}
+		if(atk){
+			p->attack(a);
+			sleep(1);
+			atk = false;
+		}
+		else if(god){
+			cout << "~ THE GODS ARE BY YOUR SIDE ~" << endl;
+			sleep(1);
+			Ally* gods = new Ally("The Gods", 1);
+			for(int i = 0; i < 195; ++i){
+				gods->upgradeWeapon();
+			}
+			gods->attack(a);
+			sleep(1);
+			delete gods;
+		}
+		if(a->getHealth() > 0){
+			cout << a->getName() << " helplessly struggles." << endl;
+			sleep(1);
+		}
+	}
+	sleep(2);
 	system("clear");
 	cout << "~ Room cleared! ~" << endl;
 	sleep(1);

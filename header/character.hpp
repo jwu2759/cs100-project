@@ -67,9 +67,16 @@ class Character{
 class Player : public Character{
 	private:
 		int abiBase = 5;
+		string wish;
 	public:
 		int getAbiBase(){
 			return abiBase;
+		}
+		const string& pWish(){
+			return wish;
+		}
+		void setWish(const string& s){
+			wish = s;
 		}
 		void upgradeAbi(){
 			abiBase += 2;
