@@ -83,5 +83,5 @@ Our project will be a story-driven RPG with linear progression. We want to have 
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  
- * Karan extensively tested the character.hpp and weapon.hpp files. Checking every possible combination for the Characters types with the different weapons, we verified that the game functions properly upon calling every command. Containing over 30 tests, we not only ensured quality performace, we assured the entire game along with the test bench contain zero memory leaks. Through validating smaller functions, such as getName() for characters, to testing bigger functions in conjunction with each other, our project was thoroughly tested.
+ * Karan extensively tested the character.hpp and weapon.hpp files. Checking every possible combination for the Characters types with the different weapons, we verified that the game functions properly upon calling every command. Containing over 30 tests, we not only ensured quality performace, we assured the entire game along with the test bench contain zero memory leaks. Through validating smaller functions, such as getName() for characters, to testing bigger functions in conjunction with each other, our project was thoroughly tested. We have also included CI testing to our project.
  
