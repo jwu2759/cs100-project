@@ -52,13 +52,13 @@ Our project will be a story-driven RPG with linear progression. We want to have 
  * The names being used throughout the entire story:
  ![Name_Used](images/Names_Story.png)
  
- * The story asking the player for their wish:
- ![Before_Wish](images/Before_Wish.png)
+ * The Player being asked for story-relevant input:
+ ![Wish_wanted](images/Before_Wish.png)
  
  * The wish being used across the story:
  ![Post_Wish](images/After_Wish.png)
  
- * The battle system giving the p\Player a multitude of options:
+ * The battle system giving the Player a multitude of options:
  ![Battle_Input](images/Attack_Selection.png)
  
  * The various outputs being affected by the turn-based gameplay:
