@@ -51,10 +51,19 @@ class Character{
 			if(potion == 0){
 				cout << "You do not have any potions." << endl;
 			}else{
-				currHealth += 50;
-				potion--;
-				cout << "*Your wounds begin to heal*" << endl;
-				cout << "*You restored 50 hp*" << endl;
+				if(currHealth == 100 ){
+					cout << "You are at full health already." << endl;
+				}else if(currHealth <= 50){
+					currHealth += 50;
+                                	potion--;
+        	                        cout << "*Your wounds begin to heal*" << endl;
+	                                cout << "*You restored 50 hp*" << endl;
+				}else{
+					currHealth = 100;
+					potion--;
+					cout << "*Your wounds begin to heal*" << endl;
+					cout << "*Your health was fully restored*" << endl;
+				}
 			}
 		}
 		~Character(){

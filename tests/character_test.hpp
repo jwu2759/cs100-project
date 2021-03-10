@@ -372,5 +372,29 @@ EXPECT_EQ(MyMan->getHealth(), 97 );
         delete MyMan;
 }
 
+TEST(PotionTest, PotionTestCall){
+	std::string ryan = "Jason";
+	int weapon = 1;
+	Character* MyMan = new Player(ryan, weapon);
+	EXPECT_EQ(MyMan->getPotion(), 2);
+	MyMan->setPotion(4);
+	EXPECT_EQ(MyMan->getPotion(), 4);
+	delete MyMan;
+}
+
+TEST(PotionTest, PotionTestConsume){
+        std::string ryan = "Jason";
+        int weapon = 1;
+        Character* MyMan = new Player(ryan, weapon);
+	MyMan->setHealth(40);
+	MyMan->consume();
+	EXPECT_EQ(MyMan->getHealth(), 90);
+	MyMan->setHealth(60);
+	MyMan->consume();
+	EXPECT_EQ(MyMan->getHealth(), 100);
+	MyMan->consume();
+	EXPECT_EQ(MyMan->getHealth(), 100);
+	delete MyMan;
+}
 
 #endif
