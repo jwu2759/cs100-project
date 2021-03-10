@@ -7,8 +7,16 @@
 
 int main(){
 	srand(time(0));
-	Player* user = new Player("Kanon", 1);
-	Ally* comp = new Ally("Qroobz", 2);
+	std::string userName;
+	std::string allyName;
+	cout << "Welcome to The Mountain\n\nBefore we begin, please enter your name: " ;
+	getline(cin,userName);
+	cout << "Please enter the name of your best friend: ";
+	getline(cin,allyName);
+
+
+	Player* user = new Player(userName, 1);
+	Ally* comp = new Ally(allyName, 2);
 	Story* game = new Story(
 		{"March 14, 4801 AE: Eternal darkness has ravaged the skies.", 
 		"The sun hasn’t risen in months. The corn stalks in the field have shriveled into twigs.\n",
