@@ -48,7 +48,18 @@ Our project will be a story-driven RPG with linear progression. We want to have 
   Screenshots of the input/output after running your application
  * The game initializes asking for user input regarding the character names:
  ![Name Input](images/Name_Input.png)
+ * The names being used throughout the entire story:
+ ![Name_Used](images/Names_Story.png)
+ * The story asking the player for their wish:
+ ![Before_Wish](images/Before_Wish.png)
+ * The wish being used across the story:
+ ![Post_Wish](images/After_Wish.png)
+ * The battle system giving the player a multitude of options:
+ ![Battle_Input](images/Attack_Selection.png)
+ * The various outputs being affected by the turn-based gameplay:
+ ![Battle_Output](images/Post_Attack.png)
  
+. 
  ## Installation/Usage
  > Instructions on installing and running your application
  ## Testing
