@@ -360,5 +360,17 @@ EXPECT_EQ(MyMan->getHealth(), 76 );
 	delete MyMan;
 }
 
+TEST(DefendTest, DefendCheck11){
+        std::string ryan = "Jason";
+        int weapon = 1;
+        Character* MyMan = new Enemy (ryan, weapon);
+
+        MyMan->setHealth(94);
+        MyMan->defend();
+
+EXPECT_EQ(MyMan->getHealth(), 97 );
+        delete MyMan;
+}
+
 
 #endif
