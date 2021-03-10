@@ -1,4 +1,4 @@
-# Lost Souls
+# The Mountain
  Authors: <br/>
  > Ryan Chang, https://github.com/ryanchangx <br/>
  > Min-Chen Wu, https://github.com/jwu2759 <br/>
@@ -6,7 +6,7 @@
  
 ## Project Description
 Our project will be a story-driven RPG with linear progression. We want to have a compelling story relying on understandable motives and the weight of one’s decisions. We plan to have a party (each with unique classes) consisting of the main protagonist (intended to be the player), along with multiple trusted allies. Throughout the course of the game, the main party will have to fight foes and ultimately reach a final destination.
-* Games have always been a key part of our lives, ever since we were children. They provide a healthy challenge, inspiring stories, and a lot of fun. Even though they were simple RPGs, games like Final Fantasy and Pokemon have defined many childhoods across the world. This topic is important to us due to the sheer impact they have on people.
+* Games have always been a key part of our lives, ever since we were children. They provide a healthy challenge, inspiring stories, and a lot of fun. Even though they were simple RPGs, games like Final Fantasy and Pokemon have defined many childhoods across the world. This topic is important to us due to the sheer impact they have on people. We want people to leave with a lasting impression.
 * The language we will use for the project is C++, we plan to use GDB, and valgrind to debug our code, and Git and GitHub for version control. 
 * The input we will be using for this project is user inputs (the player can type the names of the Protagonist and allies, along with picking actions in battle such as attacking). Outputs include displaying character and combat stats (damage/health), and outputing dialogue and story to the user.
   * Factory Pattern: To create the weapon class, and support different kinds of weapons, we will be using a factory pattern to return weapons of different types. This will be used with the creation of weapons for the player, ally, and enemy classes. Using a factory will simplify the interface for creating weapons for an unknown number of enemies and characters.
