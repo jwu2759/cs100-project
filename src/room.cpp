@@ -33,17 +33,17 @@ Battle::Battle(int eCount, Room* r){
 		int title = rand() % 3;
 		string name;
 		if(title == 0){
-			name = "Cheesy";
+			name = "Bandit";
 			++n1;
 			enemyName = name + " " + to_string(n1);
 		}
 		else if(title == 1){
-			name = "Gordita";
+			name = "Thief";
 			++n2;
 			enemyName = name + " " + to_string(n2);
 		}
 		else if(title == 2){
-			name = "Crunch";
+			name = "Marauder";
 			++n3;
 			enemyName = name + " " + to_string(n3);
 		}
