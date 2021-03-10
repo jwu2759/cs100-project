@@ -47,7 +47,7 @@ Our project will be a story-driven RPG with linear progression. We want to have 
  ## Screenshots
   Screenshots of the input/output after running your application
  * The game initializes asking for user input regarding the character names:
- ![Name Input](images/Name_input.png)
+ ![Name Input](images/Name_Input.png)
  
  ## Installation/Usage
  > Instructions on installing and running your application
